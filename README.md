@@ -7,7 +7,7 @@
 <p>En el repositorio se adjunta el trabajo practico proporcionado por la materia.</p>
 <p>Para ver el proyecto solo hay que ejecutar el scrip de generador.py</p>
 </div>
-<h2 aling="center">Funcionalidades Impelmentadas</h2>
+<h2 aling="center">Funcionalidades Implementadas</h2>
  
 1. **Generación básica de HTML** con f-strings desde una lista de tuplas.
 2. **Filtrado de artículos vacíos** y normalización del autor (capitalización y eliminación de espacios).
