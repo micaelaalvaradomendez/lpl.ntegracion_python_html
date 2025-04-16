@@ -1,3 +1,6 @@
+import webbrowser
+import os
+
 class ParserHtml:
     #inicializacion
     def __init__(self, articulos):
@@ -6,11 +9,14 @@ class ParserHtml:
     def generar_html(self, nombre_archivo="articulos.html"):
         cuerpo = ""
         for titulo, autor, texto in self.articulos:
+            if not titulo.strip() or not autor.strip() or not texto.strip():
+                continue
+            autor_normalizado = ' '.join(autor.strip().title().split())
             cuerpo += f"""
             <article>
-                <h2>{titulo}</h2>
-                <h4>Por {autor}</h4>
-                <p>{texto}</p>
+                <h2>{titulo.strip()}</h2>
+                <h4>Por {autor_normalizado}</h4>
+                <p>{texto.strip()}</p>
             </article>
             <hr>
             """
@@ -23,12 +29,14 @@ class ParserHtml:
         </head>
         <body>
             <h1>Lista de Artículos</h1>
-            {cuerpo}
+            {cuerpo if cuerpo else "<p>No hay artículos válidos para mostrar.</p>"}
         </body>
         </html>
         """
         with open(nombre_archivo, "w", encoding="utf-8") as archivo:
             archivo.write(html_completo)
+        ruta_absoluta = os.path.abspath(nombre_archivo)
+        webbrowser.open(f"file://{ruta_absoluta}")
         
         print(f"Archivo HTML generado correctamente: {nombre_archivo}")
 
