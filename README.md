@@ -3,7 +3,9 @@
 <h2 align="center">Trabajo Práctico N°2</h2>
 <div align="center"> 
   <p>En este repositorio se encuentra el desarrollo que corresponde a un trabajo practico de la carrera "Licenciatura en Sistemas" de la UNTDF correspondiente a la materia "Laboratorio de programacion y lenguajes</p>
-  <p>El trabajo consiste en generar una web dinamica de articulos periodisticos a traves de scripts en Python que generen automáticamente un sitio web a partir de una lista de artículos periodísticos, implementando progresivamente funcionalidades tanto visuales como estructurales. La web final cuenta con una presentación clara de los artículos, organización por autor, navegación entre páginas, estilo personalizado y uso de Bootstrap.</p></div>
+  <p>El trabajo consiste en generar una web dinamica de articulos periodisticos a traves de scripts en Python que generen automáticamente un sitio web a partir de una lista de artículos periodísticos, implementando progresivamente funcionalidades tanto visuales como estructurales. La web final cuenta con una presentación clara de los artículos, organización por autor, navegación entre páginas, estilo personalizado y uso de Bootstrap.</p>
+<p>En el repositorio se adjunta el trabajo practico proporcionado por la materia</p>
+</div>
 <h2 aling="center">Funcionalidades Impelmentadas</h2>
  
 1. **Generación básica de HTML** con f-strings desde una lista de tuplas.
