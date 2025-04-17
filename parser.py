@@ -45,53 +45,54 @@ class ParserHtml:
                 <head>
                     <meta charset="UTF-8">
                     <title>{articulo.titulo}</title>
+                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
                     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
                     <style>
                         body {{
                             font-family: "PT Sans", sans-serif;
-                            margin: 40px;
-                            background-color: #DEDBD2;
-                            color: #4313839;
+                            background-color: #f8f9fa;
+                            padding-top: 56px;
                         }}
-                        article {{
-                            background-color: #F7E1D7;
-                            padding: 20px;
-                            border-radius: 20px;
-                            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-                            margin-bottom: 20px;
-                            max-width: 800px;
-                            margin: 0 auto;
+                        .articulo-completo {{
+                            background-color: white;
+                            border-radius: 8px;
+                            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                            padding: 30px;
+                            margin-top: 30px;
                         }}
-                        h1, h2 {{
-                            color: #6F2732;
-                        }}
-                        a {{
-                            color: #6F2732;
-                            text-decoration: none;
-                            font-weight: bold;
-                        }}
-                        a:hover {{
-                            text-decoration: underline;
-                        }}
-                        .volver {{
-                            display: inline-block;
+                        .volver-inicio {{
                             margin-top: 20px;
-                            padding: 8px 16px;
-                            background-color: #EDAFB8;
-                            border-radius: 4px;
                         }}
                     </style>
                 </head>
                 <body>
-                    <article>
-                        <h1>{articulo.titulo}</h1>
-                        <p><strong>Autor:</strong> {articulo.autor}</p>
-                        <div>{articulo.texto.replace('\n', '<br>')}</div>
-                        <a class="volver" href="../{nombre_archivo}">← Volver al inicio</a>
-                    </article>
-                    <footer>
-                        <p>Pagina generada el {fecha}</p>
-                    </footer>
+                    <!-- Navbar Bootstrap -->
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                        <div class="container">
+                            <a class="navbar-brand" href="../index.html">Articulo periodistico</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="../index.html">Inicio</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <div class="container">
+                        <div class="articulo-completo">
+                            <h1 class="mb-3">{articulo.titulo}</h1>
+                            <h5 class="text-muted mb-4">Por: {articulo.autor}</h5>
+                            <div class="articulo-contenido">{articulo.texto.replace('\n', '<br>')}</div>
+                            <a href="../index.html" class="btn btn-primary volver-inicio">← Volver al inicio</a>
+                        </div>
+                    </div>
+
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                 </body>
                 </html>
                 """)
@@ -133,111 +134,115 @@ class ParserHtml:
         <head>
             <meta charset="UTF-8">
             <title>Nuestros Artículos Periodísticos</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
             <style>
                 body {{
                     font-family: "PT Sans", sans-serif;
-                    margin: 40px;
-                    background-color: #DEDBD2;
-                    color: #4313839;
-                    line-height: 1.6;
+                    background-color: #f8f9fa;
+                    padding-top: 56px;
                 }}
-                header {{
-                    background-color: #EDAFB8;
-                    color: #7C6A0A;
-                    padding: 20px;
-                    text-align: center;
-                    margin-bottom: 30px;
-                    border-radius: 8px;
+                .articulo-card {{
+                    height: 100%;
+                    transition: transform 0.3s;
                 }}
-                nav {{
-                    background-color: #F7E1D7;
-                    padding: 15px;
-                    border-radius: 8px;
-                    margin-bottom: 20px;
+                .articulo-card:hover {{
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
                 }}
-                nav ul {{
-                    list-style: none;
-                    padding: 0;
-                    columns: 3;
+                .autor-section {{
+                    margin-bottom: 40px;
                 }}
-                nav li {{
-                    margin-bottom: 8px;
-                }}
-                section {{
-                    margin-bottom: 30px;
-                }}
-                h1, h2 {{
-                    color: #6F2732;
-                }}
-                h3 {{
-                    color: #F58D9D;
-                    border-bottom: 2px solid #EDAFB8;
-                    padding-bottom: 5px;
-                }}
-                .articulo-resumen {{
-                    background-color: #F7E1D7;
-                    padding: 15px;
-                    border-radius: 8px;
-                    margin-bottom: 15px;
-                }}
-                .articulo-resumen h4 {{
-                    margin-top: 0;
-                    margin-bottom: 5px;
-                }}
-                .articulo-resumen p {{
-                    margin: 0;
-                    font-size: 0.9em;
-                    color: #6F2732;
-                }}
-                a {{
-                    color: #6F2732;
-                    text-decoration: none;
-                }}
-                a:hover {{
-                    text-decoration: underline;
-                }}
-                footer {{
-                    background-color: #4A5759;
-                    color: #F7E1D7;
-                    text-align: center;
-                    padding: 10px;
-                    margin-top: 40px;
-                    border-radius: 8px;
-                }}
-                #busqueda {{
-                    width: 50%;
-                    padding: 10px;
-                    font-size: 16px;
-                    border-radius: 6px;
-                    border: 1px solid #ccc;
+                .autor-title {{
+                    border-bottom: 2px solid #dee2e6;
+                    padding-bottom: 10px;
                     margin-bottom: 20px;
                 }}
             </style>
         </head>
         <body>
-            <header>
-                <h1>Artículos Disponibles</h1>
-                <div id="buscador">
-                    <input type="text" id="busqueda" placeholder="Buscar artículos...">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">Articulos Periodisticos</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index.html">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#autores">Autores</a>
+                            </li>
+                        </ul>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Buscar..." id="busqueda">
+                        </form>
+                    </div>
                 </div>
-            </header>
-            {indice_autores}
-            {lista_articulos if lista_articulos else "<p>No hay artículos disponibles.</p>"}
-            <footer>
-                <p>Pagina generada el {fecha}</p>
+            </nav>
+
+            <div class="container mt-5">
+                <h1 class="text-center mb-5">Artículos Disponibles</h1>
+                <div class="card mb-5">
+                    <div class="card-header">
+                        <h2 id="autores">Autores</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            {"".join(
+                                f'<div class="col-md-4 mb-3"><a href="#{generar_id(autor)}" class="btn btn-outline-primary w-100">{autor}</a></div>'
+                                for autor in sorted(articulos_por_autor.keys())
+                            )}
+                        </div>
+                    </div>
+                </div>
+                {"".join(
+                    f'''
+                    <div class="autor-section" id="{generar_id(autor)}">
+                        <h2 class="autor-title">{autor}</h2>
+                        <div class="row">
+                            {"".join(
+                                f'''
+                                <div class="col-md-4 mb-4">
+                                    <div class="card articulo-card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{articulo.titulo}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">Por: {articulo.autor}</h6>
+                                            <a href="{carpeta_articulos}/{generar_id(articulo.titulo)}.html" class="btn btn-primary mt-3">Leer más</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                '''
+                                for articulo in articulos
+                            )}
+                        </div>
+                    </div>
+                    '''
+                    for autor, articulos in articulos_por_autor.items()
+                )}
+            </div>
+
+            <footer class="bg-dark text-white text-center py-4 mt-5">
+                <div class="container">
+                    <p>Portal generado el {fecha}</p>
+                </div>
             </footer>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script>
+                // Función de búsqueda
                 document.getElementById('busqueda').addEventListener('input', function() {{
                     const termino = this.value.toLowerCase();
-                    const articulos = document.querySelectorAll('.articulo-resumen');
+                    const cards = document.querySelectorAll('.articulo-card');
 
-                    articulos.forEach(articulo => {{
-                        const texto = articulo.textContent.toLowerCase();
+                    cards.forEach(card => {{
+                        const texto = card.textContent.toLowerCase();
                         if (texto.includes(termino)) {{
-                            articulo.style.display = 'block';
+                            card.parentElement.style.display = 'block';
                         }} else {{
-                            articulo.style.display = 'none';
+                            card.parentElement.style.display = 'none';
                         }}
                     }});
                 }});
@@ -249,9 +254,10 @@ class ParserHtml:
         # Guardar la página principal
         with open(nombre_archivo, "w", encoding="utf-8") as f:
             f.write(html_principal)
-        
+
+        #para que se abra el html al ejecutar el codigo
         ruta_absoluta = os.path.abspath(nombre_archivo)
         webbrowser.open(f"file://{ruta_absoluta}")
 
-        print(f"Portal generado correctamente. Archivo principal: {nombre_archivo}")
+        print(f"HTML generado correctamente. Archivo principal: {nombre_archivo}")
         print(f"Artículos guardados en la carpeta: {carpeta_articulos}/")
