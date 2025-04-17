@@ -16,9 +16,6 @@ articulos_def = [
     ("El auge de la inteligencia artificial", "Carlos Méndez", 
      "La IA transforma industrias: desde medicina hasta transporte. Los algoritmos ya son clave en tareas cotidianas y estratégicas. Su impacto exige un debate ético sobre privacidad, sesgos, automatización del empleo y supervisión legal adecuada."),
     
-    ("Cambio climático: ¿estamos a tiempo?", "Ana Torres", 
-     "Eventos extremos, aumento del nivel del mar y pérdida de especies son señales de alarma. La lucha contra el cambio climático exige compromisos globales y acciones concretas en sectores clave como energía, transporte y agricultura."),
-    
     ("La revolución del teletrabajo", "Marta López", 
      "El trabajo remoto trajo libertad, pero también nuevos retos: fatiga digital, soledad y dificultad para desconectar."),
     

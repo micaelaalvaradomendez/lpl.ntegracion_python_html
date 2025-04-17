@@ -10,6 +10,19 @@ def generar_id(texto):
                      .replace("í", "i").replace("ó", "o").replace("ú", "u") \
                      .replace("ñ", "n")
 
+#funcion globarl para generar el pie de pagina
+def generar_footer():
+    año_actual = datetime.now().year
+    return f"""
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p> {año_actual} - Todos los derechos reservados</p>
+            <p class="mb-0">Generado el {datetime.now().strftime("%d/%m/%Y %H:%M")}</p>
+        </div>
+    </footer>
+    """
+
+
 class Articulo:
     def __init__(self, titulo, autor, texto):
         self.titulo = titulo.strip()
@@ -70,16 +83,6 @@ class ParserHtml:
                     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                         <div class="container">
                             <a class="navbar-brand" href="../index.html">Articulo periodistico</a>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarNav">
-                                <ul class="navbar-nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="../index.html">Inicio</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </nav>
 
@@ -91,7 +94,7 @@ class ParserHtml:
                             <a href="../index.html" class="btn btn-primary volver-inicio">← Volver al inicio</a>
                         </div>
                     </div>
-
+                    {generar_footer()}
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                 </body>
                 </html>
@@ -108,8 +111,64 @@ class ParserHtml:
         indice_autores = "<nav><h2>Índice de autores</h2><ul>"
         for autor in sorted(articulos_por_autor.keys()):
             autor_id = generar_id(autor)
-            indice_autores += f'<li><a href="#{autor_id}">{autor}</a></li>'
-        indice_autores += "</ul></nav><hr>"
+            indice_autores = """
+                <div class="card mb-5">
+                    <div class="card-header">
+                        <h2 id="autores">Autores</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">                            
+                            <div class="col-md-4 mb-3">
+                            <div class="d-flex justify-content-between align-items-center border p-3 rounded">
+                            <a href="#{generar_id(autor)}" class="btn btn-outline-primary w-100 position-relative">
+                            {autor}
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {len(articulos)}</span></a></div>
+                            for autor, articulos in sorted(articulos_por_autor.items())
+                            )}
+                        </div>
+                    </div>
+                </div>
+                """
+            
+        def generar_tabla(articulos_por_autor):
+            filas = ""
+            total = len(self.articulos)
+            for autor, articulos in sorted(articulos_por_autor.items(), key=lambda x: -len(x[1])):
+                filas += (
+                    f"<tr>"
+                    f"<td><a href='#{generar_id(autor)}' class='text-decoration-none'>{autor}</a></td>"
+                    f"<td class='text-end'>{len(articulos)}</td>"
+                    f"</tr>"
+                )
+            return f"""
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0"><i class="bi bi-bar-chart me-2"></i>Autores</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Autor</th>
+                                    <th class="text-end">Artículos Publicados</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {filas}
+                            </tbody>
+                            <tfoot class="table-secondary fw-bold">
+                                <tr>
+                                    <td>Total</td>
+                                    <td class="text-end">{sum(len(a) for a in articulos_por_autor.values())}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            """
 
         # Generacion de la lista de artículos para la página principal
         lista_articulos = ""
@@ -168,14 +227,6 @@ class ParserHtml:
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="index.html">Inicio</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#autores">Autores</a>
-                            </li>
-                        </ul>
                         <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="Buscar..." id="busqueda">
                         </form>
@@ -185,6 +236,7 @@ class ParserHtml:
 
             <div class="container mt-5">
                 <h1 class="text-center mb-5">Artículos Disponibles</h1>
+                {generar_tabla(articulos_por_autor)}
                 <div class="card mb-5">
                     <div class="card-header">
                         <h2 id="autores">Autores</h2>
@@ -223,13 +275,7 @@ class ParserHtml:
                     for autor, articulos in articulos_por_autor.items()
                 )}
             </div>
-
-            <footer class="bg-dark text-white text-center py-4 mt-5">
-                <div class="container">
-                    <p>Portal generado el {fecha}</p>
-                </div>
-            </footer>
-
+            {generar_footer()}
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script>
                 // Función de búsqueda
