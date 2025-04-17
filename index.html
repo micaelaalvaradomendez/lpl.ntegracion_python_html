@@ -3,7 +3,8 @@
         <html lang="es">
         <head>
             <meta charset="UTF-8">
-            <title>Nuestros Artículos Periodísticos</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Portal de Artículos</title>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
             <style>
@@ -28,17 +29,21 @@
                     padding-bottom: 10px;
                     margin-bottom: 20px;
                 }
+                .btn.active {
+                    font-weight: bold;
+                    transform: scale(1.05);
+                }
             </style>
         </head>
         <body>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div class="container">
-                    <a class="navbar-brand" href="index.html">Articulos Periodisticos</a>
+                    <a class="navbar-brand" href="index.html">Artículos Periodísticos</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <form class="d-flex" role="search">
+                        <form class="d-flex ms-auto" role="search">
                             <input class="form-control me-2" type="search" placeholder="Buscar..." id="busqueda">
                         </form>
                     </div>
@@ -47,34 +52,76 @@
 
             <div class="container mt-5">
                 <h1 class="text-center mb-5">Artículos Disponibles</h1>
+
                 
-            <div class="card mb-4">
-                <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0"><i class="bi bi-bar-chart me-2"></i>Autores</h3>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Autor</th>
-                                    <th class="text-end">Artículos Publicados</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td><a href='#carlos-mendez' class='text-decoration-none'>Carlos Méndez</a></td><td class='text-end'>5</td></tr><tr><td><a href='#marta-lopez' class='text-decoration-none'>Marta López</a></td><td class='text-end'>5</td></tr><tr><td><a href='#ana-torres' class='text-decoration-none'>Ana Torres</a></td><td class='text-end'>4</td></tr><tr><td><a href='#juliana-romero' class='text-decoration-none'>Juliana Romero</a></td><td class='text-end'>3</td></tr><tr><td><a href='#javier-ibanez' class='text-decoration-none'>Javier Ibáñez</a></td><td class='text-end'>2</td></tr><tr><td><a href='#valeria-ruiz' class='text-decoration-none'>Valeria Ruiz</a></td><td class='text-end'>1</td></tr><tr><td><a href='#laura-martinez' class='text-decoration-none'>Laura Martínez</a></td><td class='text-end'>1</td></tr><tr><td><a href='#gonzalo-herrera' class='text-decoration-none'>Gonzalo Herrera</a></td><td class='text-end'>1</td></tr>
-                            </tbody>
-                            <tfoot class="table-secondary fw-bold">
-                                <tr>
-                                    <td>Total</td>
-                                    <td class="text-end">22</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Autores</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Autor</th>
+                                <th class="text-end">Artículos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+            <tr>
+                <td><a href='#carlos-mendez' class='text-decoration-none'>Carlos Méndez</a></td>
+                <td class='text-end'>5</td>
+            </tr>
+            
+            <tr>
+                <td><a href='#marta-lopez' class='text-decoration-none'>Marta López</a></td>
+                <td class='text-end'>5</td>
+            </tr>
+            
+            <tr>
+                <td><a href='#ana-torres' class='text-decoration-none'>Ana Torres</a></td>
+                <td class='text-end'>4</td>
+            </tr>
+            
+            <tr>
+                <td><a href='#juliana-romero' class='text-decoration-none'>Juliana Romero</a></td>
+                <td class='text-end'>3</td>
+            </tr>
+            
+            <tr>
+                <td><a href='#javier-ibanez' class='text-decoration-none'>Javier Ibáñez</a></td>
+                <td class='text-end'>2</td>
+            </tr>
+            
+            <tr>
+                <td><a href='#valeria-ruiz' class='text-decoration-none'>Valeria Ruiz</a></td>
+                <td class='text-end'>1</td>
+            </tr>
+            
+            <tr>
+                <td><a href='#laura-martinez' class='text-decoration-none'>Laura Martínez</a></td>
+                <td class='text-end'>1</td>
+            </tr>
+            
+            <tr>
+                <td><a href='#gonzalo-herrera' class='text-decoration-none'>Gonzalo Herrera</a></td>
+                <td class='text-end'>1</td>
+            </tr>
+            
+                        </tbody>
+                        <tfoot class="table-secondary fw-bold">
+                            <tr>
+                                <td>Total</td>
+                                <td class="text-end">22</td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
-            
+        </div>
+        
+
                 
     <div class="card mb-4">
         <div class="card-header">
@@ -82,6 +129,7 @@
         </div>
         <div class="card-body p-2">
             <div class="d-flex flex-wrap justify-content-center">
+                <a href="#" class="btn btn-sm btn-outline-primary m-1" onclick="resetFiltro()">Todos</a>
     
                 <span class="btn btn-sm btn-outline-secondary m-1 disabled">A</span>
             
@@ -97,17 +145,17 @@
             
                 <span class="btn btn-sm btn-outline-secondary m-1 disabled">G</span>
             
-                <a href="#filtro-H" class="btn btn-sm btn-primary m-1">H</a>
+                <a href="#" class="btn btn-sm btn-primary m-1" onclick="filtrarPorInicial('H')">H</a>
             
-                <a href="#filtro-I" class="btn btn-sm btn-primary m-1">I</a>
+                <a href="#" class="btn btn-sm btn-primary m-1" onclick="filtrarPorInicial('I')">I</a>
             
                 <span class="btn btn-sm btn-outline-secondary m-1 disabled">J</span>
             
                 <span class="btn btn-sm btn-outline-secondary m-1 disabled">K</span>
             
-                <a href="#filtro-L" class="btn btn-sm btn-primary m-1">L</a>
+                <a href="#" class="btn btn-sm btn-primary m-1" onclick="filtrarPorInicial('L')">L</a>
             
-                <a href="#filtro-M" class="btn btn-sm btn-primary m-1">M</a>
+                <a href="#" class="btn btn-sm btn-primary m-1" onclick="filtrarPorInicial('M')">M</a>
             
                 <span class="btn btn-sm btn-outline-secondary m-1 disabled">N</span>
             
@@ -117,11 +165,11 @@
             
                 <span class="btn btn-sm btn-outline-secondary m-1 disabled">Q</span>
             
-                <a href="#filtro-R" class="btn btn-sm btn-primary m-1">R</a>
+                <a href="#" class="btn btn-sm btn-primary m-1" onclick="filtrarPorInicial('R')">R</a>
             
                 <span class="btn btn-sm btn-outline-secondary m-1 disabled">S</span>
             
-                <a href="#filtro-T" class="btn btn-sm btn-primary m-1">T</a>
+                <a href="#" class="btn btn-sm btn-primary m-1" onclick="filtrarPorInicial('T')">T</a>
             
                 <span class="btn btn-sm btn-outline-secondary m-1 disabled">U</span>
             
@@ -139,293 +187,295 @@
         </div>
     </div>
     
-                <function seccion_por_inicial at 0x78f93f50a480>
+
                 
-                    <div class="autor-section" id="ana-torres">
-                        <h2 class="autor-title">Ana Torres</h2>
-                        <div class="row">
-                            
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">La ciencia del sueño</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Ana Torres</h6>
-                                            <a href="articulos/la-ciencia-del-sueno.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">La siesta como herramienta de productividad</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Ana Torres</h6>
-                                            <a href="articulos/la-siesta-como-herramienta-de-productividad.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">El rol de la mujer en la ciencia</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Ana Torres</h6>
-                                            <a href="articulos/el-rol-de-la-mujer-en-la-ciencia.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Movimientos juveniles y cambio social</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Ana Torres</h6>
-                                            <a href="articulos/movimientos-juveniles-y-cambio-social.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
+            <div class="autor-section mb-5" data-inicial="H" id="gonzalo-herrera">
+                <h2 class="autor-title border-bottom pb-2">Gonzalo Herrera</h2>
+                <div class="row">
+            
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Sostenibilidad en la moda urbana</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Gonzalo Herrera</h6>
+                                <a href="articulos/sostenibilidad-en-la-moda-urbana.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="autor-section" id="carlos-mendez">
-                        <h2 class="autor-title">Carlos Méndez</h2>
-                        <div class="row">
-                            
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Tecnología verde</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Carlos Méndez</h6>
-                                            <a href="articulos/tecnologia-verde.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">El auge de la inteligencia artificial</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Carlos Méndez</h6>
-                                            <a href="articulos/el-auge-de-la-inteligencia-artificial.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Educación digital en América Latina</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Carlos Méndez</h6>
-                                            <a href="articulos/educacion-digital-en-america-latina.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Impacto de la IA en la educación</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Carlos Méndez</h6>
-                                            <a href="articulos/impacto-de-la-ia-en-la-educacion.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Agroecología: una alternativa sostenible</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Carlos Méndez</h6>
-                                            <a href="articulos/agroecologia:-una-alternativa-sostenible.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                        </div>
-                    </div>
-                    
-                    <div class="autor-section" id="marta-lopez">
-                        <h2 class="autor-title">Marta López</h2>
-                        <div class="row">
-                            
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Viajar en pandemia</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Marta López</h6>
-                                            <a href="articulos/viajar-en-pandemia.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">La revolución del teletrabajo</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Marta López</h6>
-                                            <a href="articulos/la-revolucion-del-teletrabajo.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">El arte callejero como forma de protesta</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Marta López</h6>
-                                            <a href="articulos/el-arte-callejero-como-forma-de-protesta.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Nuevas formas de viajar en un mundo post-pandemia</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Marta López</h6>
-                                            <a href="articulos/nuevas-formas-de-viajar-en-un-mundo-post-pandemia.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">De la calle al museo: el viaje del arte urbano</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Marta López</h6>
-                                            <a href="articulos/de-la-calle-al-museo:-el-viaje-del-arte-urbano.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                        </div>
-                    </div>
-                    
-                    <div class="autor-section" id="juliana-romero">
-                        <h2 class="autor-title">Juliana Romero</h2>
-                        <div class="row">
-                            
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Comida saludable sin complicaciones</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Juliana Romero</h6>
-                                            <a href="articulos/comida-saludable-sin-complicaciones.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Minimalismo digital: menos es más</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Juliana Romero</h6>
-                                            <a href="articulos/minimalismo-digital:-menos-es-mas.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Ciberseguridad en el hogar</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Juliana Romero</h6>
-                                            <a href="articulos/ciberseguridad-en-el-hogar.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                        </div>
-                    </div>
-                    
-                    <div class="autor-section" id="valeria-ruiz">
-                        <h2 class="autor-title">Valeria Ruiz</h2>
-                        <div class="row">
-                            
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Cultura maker y el poder de crear</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Valeria Ruiz</h6>
-                                            <a href="articulos/cultura-maker-y-el-poder-de-crear.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                        </div>
-                    </div>
-                    
-                    <div class="autor-section" id="javier-ibanez">
-                        <h2 class="autor-title">Javier Ibáñez</h2>
-                        <div class="row">
-                            
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Narrativas interactivas en el periodismo</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Javier Ibáñez</h6>
-                                            <a href="articulos/narrativas-interactivas-en-el-periodismo.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">El fenómeno del true crime</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Javier Ibáñez</h6>
-                                            <a href="articulos/el-fenomeno-del-true-crime.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                        </div>
-                    </div>
-                    
-                    <div class="autor-section" id="laura-martinez">
-                        <h2 class="autor-title">Laura Martínez</h2>
-                        <div class="row">
-                            
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">El lenguaje inclusivo en los medios</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Laura Martínez</h6>
-                                            <a href="articulos/el-lenguaje-inclusivo-en-los-medios.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                        </div>
-                    </div>
-                    
-                    <div class="autor-section" id="gonzalo-herrera">
-                        <h2 class="autor-title">Gonzalo Herrera</h2>
-                        <div class="row">
-                            
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sostenibilidad en la moda urbana</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: Gonzalo Herrera</h6>
-                                            <a href="articulos/sostenibilidad-en-la-moda-urbana.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                        </div>
-                    </div>
-                    
+                
+                </div>
             </div>
+            
+            <div class="autor-section mb-5" data-inicial="I" id="javier-ibanez">
+                <h2 class="autor-title border-bottom pb-2">Javier Ibáñez</h2>
+                <div class="row">
+            
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Narrativas interactivas en el periodismo</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Javier Ibáñez</h6>
+                                <a href="articulos/narrativas-interactivas-en-el-periodismo.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">El fenómeno del true crime</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Javier Ibáñez</h6>
+                                <a href="articulos/el-fenomeno-del-true-crime.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="autor-section mb-5" data-inicial="L" id="marta-lopez">
+                <h2 class="autor-title border-bottom pb-2">Marta López</h2>
+                <div class="row">
+            
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Viajar en pandemia</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Marta López</h6>
+                                <a href="articulos/viajar-en-pandemia.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">La revolución del teletrabajo</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Marta López</h6>
+                                <a href="articulos/la-revolucion-del-teletrabajo.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">El arte callejero como forma de protesta</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Marta López</h6>
+                                <a href="articulos/el-arte-callejero-como-forma-de-protesta.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Nuevas formas de viajar en un mundo post-pandemia</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Marta López</h6>
+                                <a href="articulos/nuevas-formas-de-viajar-en-un-mundo-post-pandemia.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">De la calle al museo: el viaje del arte urbano</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Marta López</h6>
+                                <a href="articulos/de-la-calle-al-museo:-el-viaje-del-arte-urbano.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="autor-section mb-5" data-inicial="M" id="laura-martinez">
+                <h2 class="autor-title border-bottom pb-2">Laura Martínez</h2>
+                <div class="row">
+            
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">El lenguaje inclusivo en los medios</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Laura Martínez</h6>
+                                <a href="articulos/el-lenguaje-inclusivo-en-los-medios.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="autor-section mb-5" data-inicial="M" id="carlos-mendez">
+                <h2 class="autor-title border-bottom pb-2">Carlos Méndez</h2>
+                <div class="row">
+            
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Tecnología verde</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Carlos Méndez</h6>
+                                <a href="articulos/tecnologia-verde.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">El auge de la inteligencia artificial</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Carlos Méndez</h6>
+                                <a href="articulos/el-auge-de-la-inteligencia-artificial.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Educación digital en América Latina</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Carlos Méndez</h6>
+                                <a href="articulos/educacion-digital-en-america-latina.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Impacto de la IA en la educación</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Carlos Méndez</h6>
+                                <a href="articulos/impacto-de-la-ia-en-la-educacion.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Agroecología: una alternativa sostenible</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Carlos Méndez</h6>
+                                <a href="articulos/agroecologia:-una-alternativa-sostenible.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="autor-section mb-5" data-inicial="R" id="juliana-romero">
+                <h2 class="autor-title border-bottom pb-2">Juliana Romero</h2>
+                <div class="row">
+            
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Comida saludable sin complicaciones</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Juliana Romero</h6>
+                                <a href="articulos/comida-saludable-sin-complicaciones.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Minimalismo digital: menos es más</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Juliana Romero</h6>
+                                <a href="articulos/minimalismo-digital:-menos-es-mas.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Ciberseguridad en el hogar</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Juliana Romero</h6>
+                                <a href="articulos/ciberseguridad-en-el-hogar.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="autor-section mb-5" data-inicial="R" id="valeria-ruiz">
+                <h2 class="autor-title border-bottom pb-2">Valeria Ruiz</h2>
+                <div class="row">
+            
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Cultura maker y el poder de crear</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Valeria Ruiz</h6>
+                                <a href="articulos/cultura-maker-y-el-poder-de-crear.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="autor-section mb-5" data-inicial="T" id="ana-torres">
+                <h2 class="autor-title border-bottom pb-2">Ana Torres</h2>
+                <div class="row">
+            
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">La ciencia del sueño</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Ana Torres</h6>
+                                <a href="articulos/la-ciencia-del-sueno.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">La siesta como herramienta de productividad</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Ana Torres</h6>
+                                <a href="articulos/la-siesta-como-herramienta-de-productividad.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">El rol de la mujer en la ciencia</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Ana Torres</h6>
+                                <a href="articulos/el-rol-de-la-mujer-en-la-ciencia.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Movimientos juveniles y cambio social</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: Ana Torres</h6>
+                                <a href="articulos/movimientos-juveniles-y-cambio-social.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            </div>
+
             
     <footer class="bg-dark text-white text-center py-4 mt-5">
         <div class="container">
             <p> 2025 - Todos los derechos reservados</p>
-            <p class="mb-0">Generado el 17/04/2025 19:24</p>
+            <p class="mb-0">Generado el 17/04/2025 20:06</p>
         </div>
     </footer>
     
+
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script>
                 // Función de búsqueda
@@ -435,22 +485,46 @@
 
                     cards.forEach(card => {
                         const texto = card.textContent.toLowerCase();
-                        if (texto.includes(termino)) {
-                            card.parentElement.style.display = 'block';
-                        } else {
-                            card.parentElement.style.display = 'none';
+                        card.style.display = texto.includes(termino) ? 'block' : 'none';
+                    });
+                });
+
+                // Filtro por inicial
+                function filtrarPorInicial(inicial) {
+                    // Resaltar letra activa
+                    document.querySelectorAll('.card-body .btn').forEach(btn => {
+                        btn.classList.remove('active');
+                        if (btn.textContent === inicial) {
+                            btn.classList.add('active');
                         }
                     });
-                });
-                // Filtro por letras
-                document.querySelectorAll('a[href^="#filtro-"]').forEach(anchor => {
-                    anchor.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+
+                    // Filtrar secciones
+                    document.querySelectorAll('.autor-section').forEach(section => {
+                        section.style.display = section.dataset.inicial === inicial ? 'block' : 'none';
+                    });
+
+                    // Scroll a la primera sección visible
+                    const primeraSeccion = document.querySelector('.autor-section[style="display: block;"]');
+                    if (primeraSeccion) {
+                        window.scrollTo({
+                            top: primeraSeccion.offsetTop - 100,
                             behavior: 'smooth'
                         });
+                    }
+                }
+
+                function resetFiltro() {
+                    // Quitar resaltado de letras
+                    document.querySelectorAll('.card-body .btn').forEach(btn => {
+                        btn.classList.remove('active');
                     });
-                });
+
+                    // Mostrar todas las secciones
+                    document.querySelectorAll('.autor-section').forEach(section => {
+                        section.style.display = 'block';
+                    });
+                }
             </script>
         </body>
         </html>

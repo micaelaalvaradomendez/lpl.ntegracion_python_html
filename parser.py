@@ -38,18 +38,21 @@ def filtro_alfabeto(articulos_por_autor):
         </div>
         <div class="card-body p-2">
             <div class="d-flex flex-wrap justify-content-center">
+                <a href="#" class="btn btn-sm btn-outline-primary m-1" onclick="resetFiltro()">Todos</a>
     """
+
     #todas las letras
     letras = [chr(i) for i in range(65, 91)]  # A-Z
     for letra in letras:
         if letra in iniciales:
             html += f"""
-                <a href="#filtro-{letra}" class="btn btn-sm btn-primary m-1">{letra}</a>
+                <a href="#" class="btn btn-sm btn-primary m-1" onclick="filtrarPorInicial('{letra}')">{letra}</a>
             """
         else:
             html += f"""
                 <span class="btn btn-sm btn-outline-secondary m-1 disabled">{letra}</span>
             """
+    
     html += """
             </div>
         </div>
@@ -57,46 +60,27 @@ def filtro_alfabeto(articulos_por_autor):
     """
     return html
 
-def seccion_por_inicial(articulos_por_autor):
-    autores_por_inicial = defaultdict(dict)
-    for autor, articulos in articulos_por_autor.items():
-        inicial = autor.split()[-1][0].upper()
-        autores_por_inicial[inicial][autor] = articulos
-    
+def seccion_autores(articulos_por_autor):
     html = ""
-    for inicial in sorted(autores_por_inicial.keys()):
+    for autor, articulos in sorted(articulos_por_autor.items(), key=lambda x: x[0].split()[-1]):
+        inicial_apellido = autor.split()[-1][0].upper()
         html += f"""
-        <div id="filtro-{inicial}" class="inicial-section mb-5">
-            <h3 class="border-bottom pb-2">{inicial}</h3>
+        <div class="autor-section" data-inicial="{inicial_apellido}">
+            <h2 class="autor-title border-bottom pb-2" id="{generar_id(autor)}">{autor}</h2>
             <div class="row">
         """
         
-        for autor, articulos in sorted(autores_por_inicial[inicial].items()):
+        for articulo in articulos:
             html += f"""
-            <div class="col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-header">
-                        <h4>{autor}</h4>
-                        <span class="badge bg-primary">{len(articulos)} artículos</span>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-            """
-            
-            for articulo in articulos:
-                html += f"""
-                            <li class="mb-2">
-                                <a href="articulos/{generar_id(articulo.titulo)}.html" class="text-decoration-none">
-                                    {articulo.titulo}
-                                </a>
-                            </li>
-                """
-            
-            html += """
-                        </ul>
+                <div class="col-md-4 mb-4">
+                    <div class="card articulo-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{articulo.titulo}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Por: {articulo.autor}</h6>
+                            <a href="articulos/{generar_id(articulo.titulo)}.html" class="btn btn-primary mt-3">Leer más</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             """
         
         html += """
@@ -193,92 +177,81 @@ class ParserHtml:
                 continue
             articulos_por_autor[articulo.autor].append(articulo)
 
-        # Generacion del índice para autores
-        indice_autores = "<nav><h2>Índice de autores</h2><ul>"
-        for autor in sorted(articulos_por_autor.keys()):
-            autor_id = generar_id(autor)
-            indice_autores = """
-                <div class="card mb-5">
-                    <div class="card-header">
-                        <h2 id="autores">Autores</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">                            
-                            <div class="col-md-4 mb-3">
-                            <div class="d-flex justify-content-between align-items-center border p-3 rounded">
-                            <a href="#{generar_id(autor)}" class="btn btn-outline-primary w-100 position-relative">
-                            {autor}
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            {len(articulos)}</span></a></div>
-                            for autor, articulos in sorted(articulos_por_autor.items())
-                            )}
+        # Generar tabla de autores
+        filas_tabla = ""
+        for autor, articulos in sorted(articulos_por_autor.items(), key=lambda x: -len(x[1])):
+            filas_tabla += f"""
+            <tr>
+                <td><a href='#{generar_id(autor)}' class='text-decoration-none'>{autor}</a></td>
+                <td class='text-end'>{len(articulos)}</td>
+            </tr>
+            """
+
+        tabla_autores = f"""
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Autores</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Autor</th>
+                                <th class="text-end">Artículos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filas_tabla}
+                        </tbody>
+                        <tfoot class="table-secondary fw-bold">
+                            <tr>
+                                <td>Total</td>
+                                <td class="text-end">{sum(len(a) for a in articulos_por_autor.values())}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        """
+
+        # Generar secciones de artículos por autor
+        secciones_articulos = ""
+        for autor, articulos in sorted(articulos_por_autor.items(), key=lambda x: x[0].split()[-1]):
+            inicial_apellido = autor.split()[-1][0].upper()
+            secciones_articulos += f"""
+            <div class="autor-section mb-5" data-inicial="{inicial_apellido}" id="{generar_id(autor)}">
+                <h2 class="autor-title border-bottom pb-2">{autor}</h2>
+                <div class="row">
+            """
+
+            for articulo in articulos:
+                secciones_articulos += f"""
+                    <div class="col-md-4 mb-4">
+                        <div class="card articulo-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{articulo.titulo}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Por: {articulo.autor}</h6>
+                                <a href="{carpeta_articulos}/{generar_id(articulo.titulo)}.html" class="btn btn-primary mt-3">Leer más</a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 """
-            
-        def generar_tabla(articulos_por_autor):
-            filas = ""
-            total = len(self.articulos)
-            for autor, articulos in sorted(articulos_por_autor.items(), key=lambda x: -len(x[1])):
-                filas += (
-                    f"<tr>"
-                    f"<td><a href='#{generar_id(autor)}' class='text-decoration-none'>{autor}</a></td>"
-                    f"<td class='text-end'>{len(articulos)}</td>"
-                    f"</tr>"
-                )
-            return f"""
-            <div class="card mb-4">
-                <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0"><i class="bi bi-bar-chart me-2"></i>Autores</h3>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Autor</th>
-                                    <th class="text-end">Artículos Publicados</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {filas}
-                            </tbody>
-                            <tfoot class="table-secondary fw-bold">
-                                <tr>
-                                    <td>Total</td>
-                                    <td class="text-end">{sum(len(a) for a in articulos_por_autor.values())}</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
+
+            secciones_articulos += """
                 </div>
             </div>
             """
 
-        # Generacion de la lista de artículos para la página principal
-        lista_articulos = ""
-        for autor, articulos in articulos_por_autor.items():
-            autor_id = generar_id(autor)
-            lista_articulos += f'<section id="{autor_id}">\n<h3>{autor}</h3>\n'
-            
-            for articulo in articulos:
-                id_articulo = generar_id(articulo.titulo)
-                lista_articulos += f"""
-                <div class="articulo-resumen">
-                    <h4><a href="{carpeta_articulos}/{id_articulo}.html">{articulo.titulo}</a></h4>
-                    <p>Por: {articulo.autor}</p>
-                </div>
-                """
-            lista_articulos += "</section>\n"
-
-                # HTML completo de la página principal
+        # HTML completo
         html_principal = f"""
         <!DOCTYPE html>
         <html lang="es">
         <head>
             <meta charset="UTF-8">
-            <title>Nuestros Artículos Periodísticos</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Portal de Artículos</title>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
             <style>
@@ -303,17 +276,21 @@ class ParserHtml:
                     padding-bottom: 10px;
                     margin-bottom: 20px;
                 }}
+                .btn.active {{
+                    font-weight: bold;
+                    transform: scale(1.05);
+                }}
             </style>
         </head>
         <body>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div class="container">
-                    <a class="navbar-brand" href="index.html">Articulos Periodisticos</a>
+                    <a class="navbar-brand" href="index.html">Artículos Periodísticos</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <form class="d-flex" role="search">
+                        <form class="d-flex ms-auto" role="search">
                             <input class="form-control me-2" type="search" placeholder="Buscar..." id="busqueda">
                         </form>
                     </div>
@@ -322,35 +299,16 @@ class ParserHtml:
 
             <div class="container mt-5">
                 <h1 class="text-center mb-5">Artículos Disponibles</h1>
-                {generar_tabla(articulos_por_autor)}
+
+                {tabla_autores}
+
                 {filtro_alfabeto(articulos_por_autor)}
-                {seccion_por_inicial}
-                {"".join(
-                    f'''
-                    <div class="autor-section" id="{generar_id(autor)}">
-                        <h2 class="autor-title">{autor}</h2>
-                        <div class="row">
-                            {"".join(
-                                f'''
-                                <div class="col-md-4 mb-4">
-                                    <div class="card articulo-card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{articulo.titulo}</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Por: {articulo.autor}</h6>
-                                            <a href="{carpeta_articulos}/{generar_id(articulo.titulo)}.html" class="btn btn-primary mt-3">Leer más</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                '''
-                                for articulo in articulos
-                            )}
-                        </div>
-                    </div>
-                    '''
-                    for autor, articulos in articulos_por_autor.items()
-                )}
+
+                {secciones_articulos}
             </div>
+
             {generar_footer()}
+
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script>
                 // Función de búsqueda
@@ -360,28 +318,52 @@ class ParserHtml:
 
                     cards.forEach(card => {{
                         const texto = card.textContent.toLowerCase();
-                        if (texto.includes(termino)) {{
-                            card.parentElement.style.display = 'block';
-                        }} else {{
-                            card.parentElement.style.display = 'none';
+                        card.style.display = texto.includes(termino) ? 'block' : 'none';
+                    }});
+                }});
+
+                // Filtro por inicial
+                function filtrarPorInicial(inicial) {{
+                    // Resaltar letra activa
+                    document.querySelectorAll('.card-body .btn').forEach(btn => {{
+                        btn.classList.remove('active');
+                        if (btn.textContent === inicial) {{
+                            btn.classList.add('active');
                         }}
                     }});
-                }});
-                // Filtro por letras
-                document.querySelectorAll('a[href^="#filtro-"]').forEach(anchor => {{
-                    anchor.addEventListener('click', function (e) {{
-                        e.preventDefault();
-                        document.querySelector(this.getAttribute('href')).scrollIntoView({{
+
+                    // Filtrar secciones
+                    document.querySelectorAll('.autor-section').forEach(section => {{
+                        section.style.display = section.dataset.inicial === inicial ? 'block' : 'none';
+                    }});
+
+                    // Scroll a la primera sección visible
+                    const primeraSeccion = document.querySelector('.autor-section[style="display: block;"]');
+                    if (primeraSeccion) {{
+                        window.scrollTo({{
+                            top: primeraSeccion.offsetTop - 100,
                             behavior: 'smooth'
                         }});
+                    }}
+                }}
+
+                function resetFiltro() {{
+                    // Quitar resaltado de letras
+                    document.querySelectorAll('.card-body .btn').forEach(btn => {{
+                        btn.classList.remove('active');
                     }});
-                }});
+
+                    // Mostrar todas las secciones
+                    document.querySelectorAll('.autor-section').forEach(section => {{
+                        section.style.display = 'block';
+                    }});
+                }}
             </script>
         </body>
         </html>
         """
 
-        # Guardar la página principal
+            # Guardar la página principal
         with open(nombre_archivo, "w", encoding="utf-8") as f:
             f.write(html_principal)
 
