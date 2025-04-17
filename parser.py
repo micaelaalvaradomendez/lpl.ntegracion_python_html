@@ -29,6 +29,56 @@ class ParserHtml:
         <head>
             <meta charset="UTF-8">
             <title>Nuestros Artículos Periodísticos</title>
+            <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+            <style>
+                body {{
+                    font-family: "PT Sans", sans-serif;
+                    margin: 40px;
+                    background-color: #DEDBD2; 
+                    color: #4313839; 
+                }}
+
+                header {{
+                    background-color: #EDAFB8;
+                    color: #7C6A0A;
+                    padding: 20px;
+                    text-align: center;
+                    margin-bottom: 30px;
+                }}
+
+                article {{
+                    background-color:  #F7E1D7;
+                    padding: 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                    margin-bottom: 20px;
+                }}
+
+                footer {{
+                    background-color: #4A5759;
+                    color: #F7E1D7;
+                    text-align: center;
+                    padding: 10px;
+                    margin-top: 40px;
+                }}
+
+                h1, h4{{
+                    margin-top: 0;
+                    color:#6F2732
+                }} 
+                
+                h2 {{
+                    margin-top: 0;
+                    color: #F58D9D;
+                }}
+
+                hr {{
+                    border: none;
+                    height: 1px;
+                    background-color: #F1EDDF;
+                    margin-top: 10px;
+                }}
+            </style>
         </head>
         <body>
             <h1>Artículos Disponibles</h1>
