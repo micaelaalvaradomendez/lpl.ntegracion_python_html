@@ -1,28 +1,60 @@
 import webbrowser
 import os
 from datetime import datetime
+from collections import defaultdict
 
 class ParserHtml:
     #inicializacion
     def __init__(self, articulos):
         self.articulos = articulos
 
+    def generar_id(self,nombre):
+        return nombre.lower().replace(" ", "-").replace("á", "a").replace("é", "e") \
+                             .replace("í", "i").replace("ó", "o").replace("ú", "u") \
+                             .replace("ñ", "n")
+
     def generar_html(self, nombre_archivo="articulos.html"):
+        
         #fecha actual
+        
         fecha = datetime.now().strftime("%d/%m/%Y %H:%M")
-        cuerpo = ""
+        
+        #agrupa articulos por autor
+        
+        articulos_autor = defaultdict(list)
         for titulo, autor, texto in self.articulos:
             if not titulo.strip() or not autor.strip() or not texto.strip():
                 continue
             autor_normalizado = ' '.join(autor.strip().title().split())
-            cuerpo += f"""
-            <article>
-                <h2>{titulo.strip()}</h2>
-                <h4>Por {autor_normalizado}</h4>
-                <p>{texto.strip()}</p>
-            </article>
-            <hr>
-            """
+            articulos_autor[autor_normalizado].append((titulo.strip(), texto.strip()))
+
+        
+        #genera indice de autores con links
+        
+        indice = "<nav><h2>Índice de autores</h2><ul>"
+        for autor in sorted(articulos_autor.keys()):
+            autor_id = self.generar_id(autor)
+            indice += f'<li><a href="#{autor_id}">{autor}</a></li>'
+        indice += "</ul></nav><hr>"
+        
+        #genera secciones por autor
+        
+        cuerpo = ""
+        for autor, articulos in articulos_autor.items():
+            autor_id = self.generar_id(autor)
+            cuerpo += f'<section id="{autor_id}">\n<h3>{autor}</h3>\n'
+            for titulo, texto in articulos:
+                cuerpo += f"""
+                <article>
+                    <h2>{titulo}</h2>
+                    <p>{texto}</p>
+                </article>
+                <hr>
+                """
+            cuerpo += "</section>\n"
+        
+        #html completo con estilos
+        
         html_completo = f"""
         <!DOCTYPE html>
         <html lang="es">
@@ -81,7 +113,10 @@ class ParserHtml:
             </style>
         </head>
         <body>
-            <h1>Artículos Disponibles</h1>
+            <header>
+                <h1>Articulos Disponibles</h1>
+            </header>
+            {indice}
             {cuerpo if cuerpo else "<p>No hay artículos válidos para mostrar.</p>"}
             <footer>
                 <p>Generado el {fecha}</p>
