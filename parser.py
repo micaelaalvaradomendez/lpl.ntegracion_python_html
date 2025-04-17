@@ -1,5 +1,6 @@
 import webbrowser
 import os
+from datetime import datetime
 
 class ParserHtml:
     #inicializacion
@@ -7,6 +8,8 @@ class ParserHtml:
         self.articulos = articulos
 
     def generar_html(self, nombre_archivo="articulos.html"):
+        #fecha actual
+        fecha = datetime.now().strftime("%d/%m/%Y %H:%M")
         cuerpo = ""
         for titulo, autor, texto in self.articulos:
             if not titulo.strip() or not autor.strip() or not texto.strip():
@@ -25,11 +28,14 @@ class ParserHtml:
         <html lang="es">
         <head>
             <meta charset="UTF-8">
-            <title>Artículos Periodísticos</title>
+            <title>Nuestros Artículos Periodísticos</title>
         </head>
         <body>
-            <h1>Lista de Artículos</h1>
+            <h1>Artículos Disponibles</h1>
             {cuerpo if cuerpo else "<p>No hay artículos válidos para mostrar.</p>"}
+            <footer>
+                <p>Generado el {fecha}</p>
+            </footer>
         </body>
         </html>
         """
@@ -39,20 +45,4 @@ class ParserHtml:
         webbrowser.open(f"file://{ruta_absoluta}")
         
         print(f"Archivo HTML generado correctamente: {nombre_archivo}")
-
-articulos = [
-    ("La ciencia del sueño", "Ana Torres", "Dormir bien mejora la memoria y el estado de ánimo."),
-    ("Tecnología verde", "Luis Pérez", "Las energías renovables son el futuro del planeta."),
-    ("Viajar en pandemia", "Marta López", "Consejos útiles para explorar el mundo de forma segura."),
-    ("El auge de la inteligencia artificial", "Carlos Méndez", "La IA está transformando industrias enteras, desde la medicina hasta el transporte."),
-    ("Cambio climático: ¿estamos a tiempo?", "Laura Gutiérrez", "El planeta muestra señales claras de deterioro. La acción global es urgente."),
-    ("La revolución del teletrabajo", "Federico Alonso", "El trabajo remoto llegó para quedarse, con impactos en la productividad y la vida personal."),
-    ("Comida saludable sin complicaciones", "Juliana Romero", "Pequeños cambios en la dieta pueden mejorar significativamente la salud."),
-    ("Educación digital en América Latina", "Sofía Ramírez", "Las plataformas virtuales abren nuevas oportunidades de aprendizaje."),
-    ("El arte callejero como forma de protesta", "Andrés Navarro", "Murales y grafitis expresan la voz del pueblo en tiempos de crisis.")
-
-]
-
-parser = ParserHtml(articulos)
-parser.generar_html()
 
