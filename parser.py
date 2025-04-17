@@ -21,10 +21,96 @@ def generar_footer():
         </div>
     </footer>
     """
+#Validacion de articulos
+class LongitudInvalidaError(Exception):
+    def __init__(self, campo, longitud_minima):
+        super().__init__(f"El campo '{campo}' debe tener al menos {longitud_minima} caracteres.")
 
+#filtro de letras por apellido
+def filtro_alfabeto(articulos_por_autor):
+    iniciales = sorted({autor.split()[-1][0].upper() for autor in articulos_por_autor.keys()})
+    
+    #filtro en HTML
+    html = """
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4 class="mb-0">Filtrar por apellido</h4>
+        </div>
+        <div class="card-body p-2">
+            <div class="d-flex flex-wrap justify-content-center">
+    """
+    #todas las letras
+    letras = [chr(i) for i in range(65, 91)]  # A-Z
+    for letra in letras:
+        if letra in iniciales:
+            html += f"""
+                <a href="#filtro-{letra}" class="btn btn-sm btn-primary m-1">{letra}</a>
+            """
+        else:
+            html += f"""
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">{letra}</span>
+            """
+    html += """
+            </div>
+        </div>
+    </div>
+    """
+    return html
+
+def seccion_por_inicial(articulos_por_autor):
+    autores_por_inicial = defaultdict(dict)
+    for autor, articulos in articulos_por_autor.items():
+        inicial = autor.split()[-1][0].upper()
+        autores_por_inicial[inicial][autor] = articulos
+    
+    html = ""
+    for inicial in sorted(autores_por_inicial.keys()):
+        html += f"""
+        <div id="filtro-{inicial}" class="inicial-section mb-5">
+            <h3 class="border-bottom pb-2">{inicial}</h3>
+            <div class="row">
+        """
+        
+        for autor, articulos in sorted(autores_por_inicial[inicial].items()):
+            html += f"""
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4>{autor}</h4>
+                        <span class="badge bg-primary">{len(articulos)} artículos</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+            """
+            
+            for articulo in articulos:
+                html += f"""
+                            <li class="mb-2">
+                                <a href="articulos/{generar_id(articulo.titulo)}.html" class="text-decoration-none">
+                                    {articulo.titulo}
+                                </a>
+                            </li>
+                """
+            
+            html += """
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            """
+        
+        html += """
+            </div>
+        </div>
+        """
+    return html
 
 class Articulo:
     def __init__(self, titulo, autor, texto):
+        if len(titulo) < 10:
+            raise LongitudInvalidaError("Título", 10)
+        if len(texto) < 10:
+            raise LongitudInvalidaError("Texto", 10)
         self.titulo = titulo.strip()
         self.autor = ' '.join(autor.strip().title().split())
         self.texto = texto.strip()
@@ -237,19 +323,8 @@ class ParserHtml:
             <div class="container mt-5">
                 <h1 class="text-center mb-5">Artículos Disponibles</h1>
                 {generar_tabla(articulos_por_autor)}
-                <div class="card mb-5">
-                    <div class="card-header">
-                        <h2 id="autores">Autores</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            {"".join(
-                                f'<div class="col-md-4 mb-3"><a href="#{generar_id(autor)}" class="btn btn-outline-primary w-100">{autor}</a></div>'
-                                for autor in sorted(articulos_por_autor.keys())
-                            )}
-                        </div>
-                    </div>
-                </div>
+                {filtro_alfabeto(articulos_por_autor)}
+                {seccion_por_inicial}
                 {"".join(
                     f'''
                     <div class="autor-section" id="{generar_id(autor)}">
@@ -290,6 +365,15 @@ class ParserHtml:
                         }} else {{
                             card.parentElement.style.display = 'none';
                         }}
+                    }});
+                }});
+                // Filtro por letras
+                document.querySelectorAll('a[href^="#filtro-"]').forEach(anchor => {{
+                    anchor.addEventListener('click', function (e) {{
+                        e.preventDefault();
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({{
+                            behavior: 'smooth'
+                        }});
                     }});
                 }});
             </script>

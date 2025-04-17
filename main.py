@@ -1,6 +1,6 @@
 from parser import ParserHtml
 from parser import Articulo
-
+from parser import LongitudInvalidaError
 
 #articulos de ejemplo generados con ChatGPT
 articulos_def = [
@@ -71,7 +71,14 @@ articulos_def = [
      "Series, podcasts y documentales que exploran crímenes reales han captado una gran audiencia. Este género plantea cuestionamientos sobre la ética del entretenimiento basado en tragedias reales.")
 ]
 
-
+#generacion de articulos validos
+articulos = []
+for (titulo, autor, texto) in articulos_def:
+    try:
+        articulo = Articulo(titulo, autor, texto)
+        articulos.append(articulo)
+    except LongitudInvalidaError as e:
+        print(f"Error en el artículo '{titulo}': {e}")
 articulos = [Articulo(t, a, tx) for (t, a, tx) in articulos_def]
 
 parser = ParserHtml(articulos)

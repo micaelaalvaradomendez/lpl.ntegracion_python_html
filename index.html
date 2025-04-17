@@ -75,16 +75,71 @@
                 </div>
             </div>
             
-                <div class="card mb-5">
-                    <div class="card-header">
-                        <h2 id="autores">Autores</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4 mb-3"><a href="#ana-torres" class="btn btn-outline-primary w-100">Ana Torres</a></div><div class="col-md-4 mb-3"><a href="#carlos-mendez" class="btn btn-outline-primary w-100">Carlos Méndez</a></div><div class="col-md-4 mb-3"><a href="#gonzalo-herrera" class="btn btn-outline-primary w-100">Gonzalo Herrera</a></div><div class="col-md-4 mb-3"><a href="#javier-ibanez" class="btn btn-outline-primary w-100">Javier Ibáñez</a></div><div class="col-md-4 mb-3"><a href="#juliana-romero" class="btn btn-outline-primary w-100">Juliana Romero</a></div><div class="col-md-4 mb-3"><a href="#laura-martinez" class="btn btn-outline-primary w-100">Laura Martínez</a></div><div class="col-md-4 mb-3"><a href="#marta-lopez" class="btn btn-outline-primary w-100">Marta López</a></div><div class="col-md-4 mb-3"><a href="#valeria-ruiz" class="btn btn-outline-primary w-100">Valeria Ruiz</a></div>
-                        </div>
-                    </div>
-                </div>
+                
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4 class="mb-0">Filtrar por apellido</h4>
+        </div>
+        <div class="card-body p-2">
+            <div class="d-flex flex-wrap justify-content-center">
+    
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">A</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">B</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">C</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">D</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">E</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">F</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">G</span>
+            
+                <a href="#filtro-H" class="btn btn-sm btn-primary m-1">H</a>
+            
+                <a href="#filtro-I" class="btn btn-sm btn-primary m-1">I</a>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">J</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">K</span>
+            
+                <a href="#filtro-L" class="btn btn-sm btn-primary m-1">L</a>
+            
+                <a href="#filtro-M" class="btn btn-sm btn-primary m-1">M</a>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">N</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">O</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">P</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">Q</span>
+            
+                <a href="#filtro-R" class="btn btn-sm btn-primary m-1">R</a>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">S</span>
+            
+                <a href="#filtro-T" class="btn btn-sm btn-primary m-1">T</a>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">U</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">V</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">W</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">X</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">Y</span>
+            
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled">Z</span>
+            
+            </div>
+        </div>
+    </div>
+    
+                <function seccion_por_inicial at 0x78f93f50a480>
                 
                     <div class="autor-section" id="ana-torres">
                         <h2 class="autor-title">Ana Torres</h2>
@@ -367,7 +422,7 @@
     <footer class="bg-dark text-white text-center py-4 mt-5">
         <div class="container">
             <p> 2025 - Todos los derechos reservados</p>
-            <p class="mb-0">Generado el 17/04/2025 18:48</p>
+            <p class="mb-0">Generado el 17/04/2025 19:24</p>
         </div>
     </footer>
     
@@ -385,6 +440,15 @@
                         } else {
                             card.parentElement.style.display = 'none';
                         }
+                    });
+                });
+                // Filtro por letras
+                document.querySelectorAll('a[href^="#filtro-"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
                     });
                 });
             </script>
