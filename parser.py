@@ -14,7 +14,7 @@ def generar_id(texto):
 def generar_footer():
     año_actual = datetime.now().year
     return f"""
-    <footer class="bg-dark text-white text-center py-4 mt-5">
+    <footer class="text-white text-center py-4 mt-5" style="background-color: #6C584C">
         <div class="container">
             <p> {año_actual} - Todos los derechos reservados</p>
             <p class="mb-0">Generado el {datetime.now().strftime("%d/%m/%Y %H:%M")}</p>
@@ -33,12 +33,12 @@ def filtro_alfabeto(articulos_por_autor):
     #filtro en HTML
     html = """
     <div class="card mb-4">
-        <div class="card-header">
+        <div class="card-header" style="background-color: #A98467; color: white;">
             <h4 class="mb-0">Filtrar por apellido</h4>
         </div>
-        <div class="card-body p-2">
+        <div class="card-body p-2" style="background-color: #DDE5B6;">
             <div class="d-flex flex-wrap justify-content-center">
-                <a href="#" class="btn btn-sm btn-outline-primary m-1" onclick="resetFiltro()">Todos</a>
+                <a href="#" class="btn btn-sm btn-outline-primary m-1" style="background-color: #A98467; color: white; border-color: #6C584C;" onclick="resetFiltro()">Todos</a>
     """
 
     #todas las letras
@@ -46,11 +46,11 @@ def filtro_alfabeto(articulos_por_autor):
     for letra in letras:
         if letra in iniciales:
             html += f"""
-                <a href="#" class="btn btn-sm btn-primary m-1" onclick="filtrarPorInicial('{letra}')">{letra}</a>
+                <a href="#" class="btn btn-sm btn-primary m-1" style="background-color: #A98467; color: white; border-color: #6C584C;" onclick="filtrarPorInicial('{letra}')">{letra}</a>
             """
         else:
             html += f"""
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">{letra}</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >{letra}</span>
             """
     
     html += """
@@ -114,13 +114,55 @@ class ParserHtml:
         os.makedirs(carpeta_articulos, exist_ok=True)
 
         # Generacion de páginas individuales para cada artículo
-        for articulo in self.articulos:
+        for i, articulo in enumerate(self.articulos):
             if not articulo.titulo or not articulo.autor or not articulo.texto:
                 continue
                 
             id_articulo = generar_id(articulo.titulo)
             ruta_articulo = os.path.join(carpeta_articulos, f"{id_articulo}.html")
             
+            #enlace de navegacion
+            nav_links = '<div class="article-navigation d-flex justify-content-between mt-4 pt-3 border-top">'
+
+            # Enlace al artículo anterior
+            if i > 0:
+                prev_article = self.articulos[i-1]
+                prev_id = generar_id(prev_article.titulo)
+                nav_links += f'''
+                    <a href="{prev_id}.html" class="btn btn-outline-primary">
+                        &larr; {prev_article.titulo[:20]}...
+                    </a>
+                '''
+            else:
+                nav_links += '<span></span>' 
+
+            # Enlace al inicio
+            nav_links += '''
+                <div class="article-navigation d-flex justify-content-between mt-4 pt-3 border-top">
+                <a href="../index.html" class="btn" style="background-color: #A98467; color: white;">
+                <a href="../index.html" class="btn btn-primary mx-2">
+                    Volver al índice
+                </a>
+            '''
+
+            # Enlace al siguiente artículo
+            if i < len(self.articulos) - 1:
+                next_article = self.articulos[i+1]
+                next_id = generar_id(next_article.titulo)
+                nav_links += f'''
+                    <a href="{next_id}.html" class="btn btn-outline-primary">
+                        {next_article.titulo[:20]}... &rarr;
+                    </a>
+                '''
+            else:
+                nav_links += '<span></span>'
+            nav_links += '''</div>
+                '''.format(
+                f'<a href="{prev_id}.html" class="btn" style="color: #6C584C; border: 1px solid #6C584C;">&larr; {prev_article.titulo[:20]}...</a>' if i > 0 else '<span></span>',
+                f'<a href="{next_id}.html" class="btn" style="color: #6C584C; border: 1px solid #6C584C;">{next_article.titulo[:20]}... &rarr;</a>' if i < len(self.articulos) - 1 else '<span></span>'
+                )
+
+            # Generar el HTML del artículo
             with open(ruta_articulo, "w", encoding="utf-8") as f:
                 f.write(f"""
                 <!DOCTYPE html>
@@ -129,41 +171,90 @@ class ParserHtml:
                     <meta charset="UTF-8">
                     <title>{articulo.titulo}</title>
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-                    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
                     <style>
                         body {{
+                            background-color: #F0EAD2;
                             font-family: "PT Sans", sans-serif;
-                            background-color: #f8f9fa;
-                            padding-top: 56px;
+                            color: #6C584C;
+                            padding-top: 60px;
                         }}
-                        .articulo-completo {{
-                            background-color: white;
-                            border-radius: 8px;
-                            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                            padding: 30px;
-                            margin-top: 30px;
+                        .articulo-container {{
+                            max-width: 800px;
+                            margin: 0 auto;
                         }}
-                        .volver-inicio {{
-                            margin-top: 20px;
+                        .articulo-header {{
+                            margin-bottom: 1.5rem;
+                        }}
+                        .articulo-titulo {{
+                            color: #6C584C;
+                            font-size: 2rem;
+                            margin-bottom: 0.5rem;
+                        }}
+                        .articulo-autor {{
+                            color: #A98467;
+                            font-size: 1.25rem;
+                            margin-bottom: 1.5rem;
+                            font-weight: 500;
+                        }}
+                        .articulo-contenido {{
+                            line-height: 1.8;
+                            font-size: 1.1rem;
+                            margin-bottom: 2rem;
+                        }}
+                        .article-navigation {{
+                            display: flex;
+                            justify-content: space-between;
+                            margin-top: 2rem;
+                            padding-top: 1rem;
+                            border-top: 1px solid #ADC178;
+                        }}
+                        .nav-btn {{
+                            color: #6C584C;
+                            background: none;
+                            border: none;
+                            font-weight: 500;
+                            padding: 0.5rem 0;
+                        }}
+                        .nav-btn:hover {{
+                            color: #A98467;
+                            text-decoration: underline;
+                        }}
+                        .navbar {{
+                            background-color: #6C584C !important;
+                            padding: 1rem;
+                        }}
+                        .navbar-brand {{
+                            font-weight: 500;
+                            font-size: 1.1rem;
                         }}
                     </style>
                 </head>
                 <body>
-                    <!-- Navbar Bootstrap -->
                     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                         <div class="container">
-                            <a class="navbar-brand" href="../index.html">Articulo periodistico</a>
+                            <a class="navbar-brand" href="../index.html">{articulo.autor}</a>
                         </div>
                     </nav>
 
-                    <div class="container">
-                        <div class="articulo-completo">
-                            <h1 class="mb-3">{articulo.titulo}</h1>
-                            <h5 class="text-muted mb-4">Por: {articulo.autor}</h5>
+                    <div class="container mt-5 pt-3">
+                        <article class="article-content">
+                            <h1 class="mb-4">{articulo.titulo}</h1>
+                            <h5 class="mb-4">Por: {articulo.autor}</h5>
                             <div class="articulo-contenido">{articulo.texto.replace('\n', '<br>')}</div>
-                            <a href="../index.html" class="btn btn-primary volver-inicio">← Volver al inicio</a>
-                        </div>
+                        </article>
+
+                        <div class="article-navigation">
+                            <div>
+                                {f'<button class="nav-btn" onclick="window.location.href=\'{prev_id}.html\'">&larr; {prev_article.titulo[:15]}...</button>' if i > 0 else ''}
+                            </div>
+                            <div>
+                                <button class="nav-btn" onclick="window.location.href='../index.html'">Volver al índice</button>
+                            </div>
+                            <div>
+                                {f'<button class="nav-btn" onclick="window.location.href=\'{next_id}.html\'">{next_article.titulo[:15]}... &rarr;</button>' if i < len(self.articulos) - 1 else ''}
+                            </div>
                     </div>
+
                     {generar_footer()}
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                 </body>
@@ -182,20 +273,20 @@ class ParserHtml:
         for autor, articulos in sorted(articulos_por_autor.items(), key=lambda x: -len(x[1])):
             filas_tabla += f"""
             <tr>
-                <td><a href='#{generar_id(autor)}' class='text-decoration-none'>{autor}</a></td>
+                <td><a href='#{generar_id(autor)}' style="color: #6C584C; text-decoration: none">{autor}</a></td>
                 <td class='text-end'>{len(articulos)}</td>
             </tr>
             """
 
         tabla_autores = f"""
         <div class="card mb-4">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header text-white" style="background-color: #A98467">
                 <h3 class="mb-0">Autores</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="background-color: #DDE5B6">
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead class="table-light">
+                    <table class="table table-striped table-hover" style="color: #6C584C">
+                        <thead  style="background-color: #A98467; color: white">
                             <tr>
                                 <th>Autor</th>
                                 <th class="text-end">Artículos</th>
@@ -204,10 +295,10 @@ class ParserHtml:
                         <tbody>
                             {filas_tabla}
                         </tbody>
-                        <tfoot class="table-secondary fw-bold">
+                        <tfoot style="background-color: #A98467; color: white">
                             <tr>
                                 <td>Total</td>
-                                <td class="text-end">{sum(len(a) for a in articulos_por_autor.values())}</td>
+                                <td class="text-end"><strong>{sum(len(a) for a in articulos_por_autor.values())}</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -256,29 +347,53 @@ class ParserHtml:
             <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
             <style>
                 body {{
-                    font-family: "PT Sans", sans-serif;
-                    background-color: #f8f9fa;
+                    fontamily: "PT Sans", sans-serif;
+                    background-color: #F0EAD2;  /* Color de fondo principal */
                     padding-top: 56px;
                 }}
-                .articulo-card {{
-                    height: 100%;
-                    transition: transform 0.3s;
+                .navbar {{
+                    background-color: #6C584C !important;  /* Color oscuro para navbar */
                 }}
-                .articulo-card:hover {{
-                    transform: translateY(-5px);
-                    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                .card {{
+                    background-color: #DDE5B6;  /* Fondo de tarjetas */
+                    border-color: #ADC178;
                 }}
-                .autor-section {{
-                    margin-bottom: 40px;
+                .card-header {{
+                    background-color: #A98467;  /* Encabezado de tarjetas */
+                    color: white;
                 }}
-                .autor-title {{
-                    border-bottom: 2px solid #dee2e6;
-                    padding-bottom: 10px;
-                    margin-bottom: 20px;
+                .btn-primary {{
+                    background-color: #A98467;
+                    border-color: #6C584C;
+                }}
+                .btn-outline-primary {{
+                    color: #6C584C;
+                    border-color: #6C584C;
+                }}
+                .btn-primary:hover, 
+                .btn-outline-primary:hover {{
+                    background-color: #6C584C;
+                    border-color: #6C584C;
+                }}
+                .btn:hover {{
+                    background-color: #6C584C !important;
+                    color: white !important;
                 }}
                 .btn.active {{
-                    font-weight: bold;
+                    background-color: #6C584C !important;
+                    color: white !important;
                     transform: scale(1.05);
+                }}
+                .autor-title {{
+                    border-bottom: 2px solid #A98467;
+                    color: #6C584C;
+                }}
+                footer {{
+                    background-color: #6C584C !important;  /* Color oscuro para footer */
+                }}
+                .table thead {{
+                    background-color: #A98467;
+                    color: white;
                 }}
             </style>
         </head>

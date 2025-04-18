@@ -9,29 +9,53 @@
             <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
             <style>
                 body {
-                    font-family: "PT Sans", sans-serif;
-                    background-color: #f8f9fa;
+                    fontamily: "PT Sans", sans-serif;
+                    background-color: #F0EAD2;  /* Color de fondo principal */
                     padding-top: 56px;
                 }
-                .articulo-card {
-                    height: 100%;
-                    transition: transform 0.3s;
+                .navbar {
+                    background-color: #6C584C !important;  /* Color oscuro para navbar */
                 }
-                .articulo-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                .card {
+                    background-color: #DDE5B6;  /* Fondo de tarjetas */
+                    border-color: #ADC178;
                 }
-                .autor-section {
-                    margin-bottom: 40px;
+                .card-header {
+                    background-color: #A98467;  /* Encabezado de tarjetas */
+                    color: white;
                 }
-                .autor-title {
-                    border-bottom: 2px solid #dee2e6;
-                    padding-bottom: 10px;
-                    margin-bottom: 20px;
+                .btn-primary {
+                    background-color: #A98467;
+                    border-color: #6C584C;
+                }
+                .btn-outline-primary {
+                    color: #6C584C;
+                    border-color: #6C584C;
+                }
+                .btn-primary:hover, 
+                .btn-outline-primary:hover {
+                    background-color: #6C584C;
+                    border-color: #6C584C;
+                }
+                .btn:hover {
+                    background-color: #6C584C !important;
+                    color: white !important;
                 }
                 .btn.active {
-                    font-weight: bold;
+                    background-color: #6C584C !important;
+                    color: white !important;
                     transform: scale(1.05);
+                }
+                .autor-title {
+                    border-bottom: 2px solid #A98467;
+                    color: #6C584C;
+                }
+                footer {
+                    background-color: #6C584C !important;  /* Color oscuro para footer */
+                }
+                .table thead {
+                    background-color: #A98467;
+                    color: white;
                 }
             </style>
         </head>
@@ -55,13 +79,13 @@
 
                 
         <div class="card mb-4">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header text-white" style="background-color: #A98467">
                 <h3 class="mb-0">Autores</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="background-color: #DDE5B6">
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead class="table-light">
+                    <table class="table table-striped table-hover" style="color: #6C584C">
+                        <thead  style="background-color: #A98467; color: white">
                             <tr>
                                 <th>Autor</th>
                                 <th class="text-end">Artículos</th>
@@ -70,50 +94,50 @@
                         <tbody>
                             
             <tr>
-                <td><a href='#carlos-mendez' class='text-decoration-none'>Carlos Méndez</a></td>
+                <td><a href='#carlos-mendez' style="color: #6C584C; text-decoration: none">Carlos Méndez</a></td>
                 <td class='text-end'>5</td>
             </tr>
             
             <tr>
-                <td><a href='#marta-lopez' class='text-decoration-none'>Marta López</a></td>
+                <td><a href='#marta-lopez' style="color: #6C584C; text-decoration: none">Marta López</a></td>
                 <td class='text-end'>5</td>
             </tr>
             
             <tr>
-                <td><a href='#ana-torres' class='text-decoration-none'>Ana Torres</a></td>
+                <td><a href='#ana-torres' style="color: #6C584C; text-decoration: none">Ana Torres</a></td>
                 <td class='text-end'>4</td>
             </tr>
             
             <tr>
-                <td><a href='#juliana-romero' class='text-decoration-none'>Juliana Romero</a></td>
+                <td><a href='#juliana-romero' style="color: #6C584C; text-decoration: none">Juliana Romero</a></td>
                 <td class='text-end'>3</td>
             </tr>
             
             <tr>
-                <td><a href='#javier-ibanez' class='text-decoration-none'>Javier Ibáñez</a></td>
+                <td><a href='#javier-ibanez' style="color: #6C584C; text-decoration: none">Javier Ibáñez</a></td>
                 <td class='text-end'>2</td>
             </tr>
             
             <tr>
-                <td><a href='#valeria-ruiz' class='text-decoration-none'>Valeria Ruiz</a></td>
+                <td><a href='#valeria-ruiz' style="color: #6C584C; text-decoration: none">Valeria Ruiz</a></td>
                 <td class='text-end'>1</td>
             </tr>
             
             <tr>
-                <td><a href='#laura-martinez' class='text-decoration-none'>Laura Martínez</a></td>
+                <td><a href='#laura-martinez' style="color: #6C584C; text-decoration: none">Laura Martínez</a></td>
                 <td class='text-end'>1</td>
             </tr>
             
             <tr>
-                <td><a href='#gonzalo-herrera' class='text-decoration-none'>Gonzalo Herrera</a></td>
+                <td><a href='#gonzalo-herrera' style="color: #6C584C; text-decoration: none">Gonzalo Herrera</a></td>
                 <td class='text-end'>1</td>
             </tr>
             
                         </tbody>
-                        <tfoot class="table-secondary fw-bold">
+                        <tfoot style="background-color: #A98467; color: white">
                             <tr>
                                 <td>Total</td>
-                                <td class="text-end">22</td>
+                                <td class="text-end"><strong>22</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -124,64 +148,64 @@
 
                 
     <div class="card mb-4">
-        <div class="card-header">
+        <div class="card-header" style="background-color: #A98467; color: white;">
             <h4 class="mb-0">Filtrar por apellido</h4>
         </div>
-        <div class="card-body p-2">
+        <div class="card-body p-2" style="background-color: #DDE5B6;">
             <div class="d-flex flex-wrap justify-content-center">
-                <a href="#" class="btn btn-sm btn-outline-primary m-1" onclick="resetFiltro()">Todos</a>
+                <a href="#" class="btn btn-sm btn-outline-primary m-1" style="background-color: #A98467; color: white; border-color: #6C584C;" onclick="resetFiltro()">Todos</a>
     
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">A</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >A</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">B</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >B</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">C</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >C</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">D</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >D</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">E</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >E</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">F</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >F</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">G</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >G</span>
             
-                <a href="#" class="btn btn-sm btn-primary m-1" onclick="filtrarPorInicial('H')">H</a>
+                <a href="#" class="btn btn-sm btn-primary m-1" style="background-color: #A98467; color: white; border-color: #6C584C;" onclick="filtrarPorInicial('H')">H</a>
             
-                <a href="#" class="btn btn-sm btn-primary m-1" onclick="filtrarPorInicial('I')">I</a>
+                <a href="#" class="btn btn-sm btn-primary m-1" style="background-color: #A98467; color: white; border-color: #6C584C;" onclick="filtrarPorInicial('I')">I</a>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">J</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >J</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">K</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >K</span>
             
-                <a href="#" class="btn btn-sm btn-primary m-1" onclick="filtrarPorInicial('L')">L</a>
+                <a href="#" class="btn btn-sm btn-primary m-1" style="background-color: #A98467; color: white; border-color: #6C584C;" onclick="filtrarPorInicial('L')">L</a>
             
-                <a href="#" class="btn btn-sm btn-primary m-1" onclick="filtrarPorInicial('M')">M</a>
+                <a href="#" class="btn btn-sm btn-primary m-1" style="background-color: #A98467; color: white; border-color: #6C584C;" onclick="filtrarPorInicial('M')">M</a>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">N</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >N</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">O</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >O</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">P</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >P</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">Q</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >Q</span>
             
-                <a href="#" class="btn btn-sm btn-primary m-1" onclick="filtrarPorInicial('R')">R</a>
+                <a href="#" class="btn btn-sm btn-primary m-1" style="background-color: #A98467; color: white; border-color: #6C584C;" onclick="filtrarPorInicial('R')">R</a>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">S</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >S</span>
             
-                <a href="#" class="btn btn-sm btn-primary m-1" onclick="filtrarPorInicial('T')">T</a>
+                <a href="#" class="btn btn-sm btn-primary m-1" style="background-color: #A98467; color: white; border-color: #6C584C;" onclick="filtrarPorInicial('T')">T</a>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">U</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >U</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">V</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >V</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">W</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >W</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">X</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >X</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">Y</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >Y</span>
             
-                <span class="btn btn-sm btn-outline-secondary m-1 disabled">Z</span>
+                <span class="btn btn-sm btn-outline-secondary m-1 disabled" style="background-color: #F0EAD2; color: #6C584C; border-color: #ADC178;" >Z</span>
             
             </div>
         </div>
@@ -468,10 +492,10 @@
             </div>
 
             
-    <footer class="bg-dark text-white text-center py-4 mt-5">
+    <footer class="text-white text-center py-4 mt-5" style="background-color: #6C584C">
         <div class="container">
             <p> 2025 - Todos los derechos reservados</p>
-            <p class="mb-0">Generado el 17/04/2025 20:06</p>
+            <p class="mb-0">Generado el 17/04/2025 21:18</p>
         </div>
     </footer>
     
