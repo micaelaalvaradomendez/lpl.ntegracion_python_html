@@ -28,3 +28,14 @@
 17. Navegación por autores según la **letra inicial de su apellido**.
 18. Archivo de **tests con `assert`** para probar métodos clave.
 19. Navegación entre artículos: **enlaces a anterior/siguiente**.
+
+<h1 align="center">Previsualización de la pagina web desarrollada</h1>
+<div align="center">
+    <p> Pagina inicial </p>
+    <img src="imagenes/index.png" title="index" width="800" />
+    <p> En la pagina inicial se muestran los articulos agrupados por autor </p>
+    <img src="imagenes/index-agrupacionautor.png" title="index" width="800" />
+    <p> Ademas si se aplica el filtro por abecedario se muestran los autores y sus respectivos articulos</p>
+    <img src="imagenes/index-filtroapellido.png" title="index" width="800" />
+    <p> Finalmente asi es la visualización de cada articulo</p>
+    <img src="imagenes/articulos.png" title="index" width="800" />
