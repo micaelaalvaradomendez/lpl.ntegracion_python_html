@@ -11,7 +11,7 @@ TEST_ARTICULOS = [
 ]
 
 def test_articulo():
-    print("\n=== Probando clase Articulo ===")
+    print("\n --- Probando clase Articulo --- ")
     
     # Test creación válida
     articulo = Articulo("Título válido", "Autor Válido", "Texto con más de 10 caracteres")
@@ -27,7 +27,6 @@ def test_articulo():
     except LongitudInvalidaError as e:
         assert "título" in str(e).lower(), "Mensaje de error incorrecto"
         print("Validación de título corto")
-    
     try:
         Articulo("Título válido", "Autor", "Corto")
         assert False, "Debería haber fallado por texto corto"
@@ -41,7 +40,7 @@ def test_articulo():
     print("Formateo de autor")
 
 def test_parser_html():
-    print("\n=== Probando clase ParserHtml ===")
+    print("\n --- Probando clase ParserHtml --- ")
     
     # Preparación
     articulos = [Articulo(*datos) for datos in TEST_ARTICULOS]
@@ -54,16 +53,15 @@ def test_parser_html():
     # Verificaciones
     assert os.path.exists(output_file), "No se creó el archivo HTML principal"
     print("Creación de archivo HTML principal")
-    
     assert os.path.exists("articulos"), "No se creó la carpeta de artículos"
     for articulo in articulos:
         expected_file = f"articulos/{generar_id(articulo.titulo)}.html"
         assert os.path.exists(expected_file), f"No se creó {expected_file}"
     print("Creación de artículos individuales")
     
+    # Verificación del contenido HTML
     with open(output_file, "r", encoding="utf-8") as f:
         content = f.read()
-    
     assert "<!DOCTYPE html>" in content, "Falta doctype en HTML"
     assert "Artículos Disponibles" in content, "Falta título en HTML"
     for articulo in articulos:
@@ -80,7 +78,7 @@ def test_parser_html():
         os.rmdir("articulos")
 
 def test_generar_id():
-    print("\n=== Probando función generar_id ===")
+    print("\n --- Probando función generar_id --- ")
     
     assert generar_id("Título del Artículo") == "título-del-artículo", "ID básico incorrecto"
     print("Generación de ID básico")
@@ -92,8 +90,8 @@ def test_generar_id():
     print("Generación de ID con ñ")
 
 if __name__ == "__main__":
-    print("=== Iniciando pruebas ===")
+    print(" --- Iniciando pruebas --- ")
     test_articulo()
     test_parser_html()
     test_generar_id()
-    print("\n=== Todas las pruebas pasaron exitosamente ===")
+    print("\n --- Todas las pruebas pasaron exitosamente ---")

@@ -10,7 +10,7 @@ def generar_id(texto):
                      .replace("í", "i").replace("ó", "o").replace("ú", "u") \
                      .replace("ñ", "n")
 
-#funcion globarl para generar el pie de pagina
+#funcion global para generar el pie de pagina
 def generar_footer():
     año_actual = datetime.now().year
     return f"""
@@ -60,6 +60,7 @@ def filtro_alfabeto(articulos_por_autor):
     """
     return html
 
+# seccion de autores
 def seccion_autores(articulos_por_autor):
     html = ""
     for autor, articulos in sorted(articulos_por_autor.items(), key=lambda x: x[0].split()[-1]):
@@ -89,6 +90,7 @@ def seccion_autores(articulos_por_autor):
         """
     return html
 
+# Generacion de Articulos
 class Articulo:
     def __init__(self, titulo, autor, texto):
         if len(titulo) < 10:
@@ -106,10 +108,9 @@ class ParserHtml:
     def generar_html(self, nombre_archivo="index.html"):
         
         #fecha actual
-        
         fecha = datetime.now().strftime("%d/%m/%Y %H:%M")
         
-        # Crear carpeta para los artículos
+        # Creacion de subcarpeta para los artículos
         carpeta_articulos = "articulos"
         os.makedirs(carpeta_articulos, exist_ok=True)
 
@@ -162,7 +163,7 @@ class ParserHtml:
                 f'<a href="{next_id}.html" class="btn" style="color: #6C584C; border: 1px solid #6C584C;">{next_article.titulo[:20]}... &rarr;</a>' if i < len(self.articulos) - 1 else '<span></span>'
                 )
 
-            # Generar el HTML del artículo
+            # Generacion el HTML del artículo
             with open(ruta_articulo, "w", encoding="utf-8") as f:
                 f.write(f"""
                 <!DOCTYPE html>
@@ -254,7 +255,6 @@ class ParserHtml:
                                 {f'<button class="nav-btn" onclick="window.location.href=\'{next_id}.html\'">{next_article.titulo[:15]}... &rarr;</button>' if i < len(self.articulos) - 1 else ''}
                             </div>
                     </div>
-
                     {generar_footer()}
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                 </body>
@@ -268,7 +268,7 @@ class ParserHtml:
                 continue
             articulos_por_autor[articulo.autor].append(articulo)
 
-        # Generar tabla de autores
+        # Generacion de tabla de autores
         filas_tabla = ""
         for autor, articulos in sorted(articulos_por_autor.items(), key=lambda x: -len(x[1])):
             filas_tabla += f"""
@@ -277,7 +277,6 @@ class ParserHtml:
                 <td class='text-end'>{len(articulos)}</td>
             </tr>
             """
-
         tabla_autores = f"""
         <div class="card mb-4">
             <div class="card-header text-white" style="background-color: #A98467">
@@ -307,7 +306,7 @@ class ParserHtml:
         </div>
         """
 
-        # Generar secciones de artículos por autor
+        # Generacion de secciones de artículos por autor
         secciones_articulos = ""
         for autor, articulos in sorted(articulos_por_autor.items(), key=lambda x: x[0].split()[-1]):
             inicial_apellido = autor.split()[-1][0].upper()
@@ -316,7 +315,6 @@ class ParserHtml:
                 <h2 class="autor-title border-bottom pb-2">{autor}</h2>
                 <div class="row">
             """
-
             for articulo in articulos:
                 secciones_articulos += f"""
                     <div class="col-md-4 mb-4">
@@ -329,7 +327,6 @@ class ParserHtml:
                         </div>
                     </div>
                 """
-
             secciones_articulos += """
                 </div>
             </div>
@@ -348,18 +345,18 @@ class ParserHtml:
             <style>
                 body {{
                     fontamily: "PT Sans", sans-serif;
-                    background-color: #F0EAD2;  /* Color de fondo principal */
+                    background-color: #F0EAD2;
                     padding-top: 56px;
                 }}
                 .navbar {{
-                    background-color: #6C584C !important;  /* Color oscuro para navbar */
+                    background-color: #6C584C !important;
                 }}
                 .card {{
-                    background-color: #DDE5B6;  /* Fondo de tarjetas */
+                    background-color: #DDE5B6;
                     border-color: #ADC178;
                 }}
                 .card-header {{
-                    background-color: #A98467;  /* Encabezado de tarjetas */
+                    background-color: #A98467;
                     color: white;
                 }}
                 .btn-primary {{
@@ -389,7 +386,7 @@ class ParserHtml:
                     color: #6C584C;
                 }}
                 footer {{
-                    background-color: #6C584C !important;  /* Color oscuro para footer */
+                    background-color: #6C584C !important;
                 }}
                 .table thead {{
                     background-color: #A98467;
@@ -414,16 +411,11 @@ class ParserHtml:
 
             <div class="container mt-5">
                 <h1 class="text-center mb-5">Artículos Disponibles</h1>
-
                 {tabla_autores}
-
                 {filtro_alfabeto(articulos_por_autor)}
-
                 {secciones_articulos}
             </div>
-
             {generar_footer()}
-
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script>
                 // Función de búsqueda
@@ -436,7 +428,6 @@ class ParserHtml:
                         card.style.display = texto.includes(termino) ? 'block' : 'none';
                     }});
                 }});
-
                 // Filtro por inicial
                 function filtrarPorInicial(inicial) {{
                     // Resaltar letra activa
@@ -446,12 +437,10 @@ class ParserHtml:
                             btn.classList.add('active');
                         }}
                     }});
-
                     // Filtrar secciones
                     document.querySelectorAll('.autor-section').forEach(section => {{
                         section.style.display = section.dataset.inicial === inicial ? 'block' : 'none';
                     }});
-
                     // Scroll a la primera sección visible
                     const primeraSeccion = document.querySelector('.autor-section[style="display: block;"]');
                     if (primeraSeccion) {{
@@ -461,13 +450,11 @@ class ParserHtml:
                         }});
                     }}
                 }}
-
                 function resetFiltro() {{
                     // Quitar resaltado de letras
                     document.querySelectorAll('.card-body .btn').forEach(btn => {{
                         btn.classList.remove('active');
                     }});
-
                     // Mostrar todas las secciones
                     document.querySelectorAll('.autor-section').forEach(section => {{
                         section.style.display = 'block';
@@ -478,13 +465,12 @@ class ParserHtml:
         </html>
         """
 
-            # Guardar la página principal
+        # se guarda la página principal
         with open(nombre_archivo, "w", encoding="utf-8") as f:
             f.write(html_principal)
 
         #para que se abra el html al ejecutar el codigo
         ruta_absoluta = os.path.abspath(nombre_archivo)
         webbrowser.open(f"file://{ruta_absoluta}")
-
         print(f"HTML generado correctamente. Archivo principal: {nombre_archivo}")
         print(f"Artículos guardados en la carpeta: {carpeta_articulos}/")
